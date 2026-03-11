@@ -1,5 +1,5 @@
 # Використовуємо легку версію Node.js
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Встановлюємо робочу директорію
 WORKDIR /app

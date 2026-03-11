@@ -21,6 +21,11 @@ services:
     container_name: event_backend
     environment:
       - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_NAME=event_management
+      - JWT_SECRET=super-secret-key-123 # <-- Рятівний рядок для токенів
     ports:
       - "3000:3000"
     depends_on:

@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { EventsModule } from './events/events.module';
 import { AuthModule } from './auth/auth.module';
-
+import { SeedModule } from './seed/seed.module'; 
 @Module({
   imports: [
     ConfigModule.forRoot({ 
@@ -34,6 +34,8 @@ import { AuthModule } from './auth/auth.module';
     EventsModule,
     
     AuthModule, 
+
+    SeedModule,
   ],
   controllers: [AppController],
   providers: [AppService],

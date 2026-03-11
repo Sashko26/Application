@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from './store/store';
@@ -11,7 +12,7 @@ import CreateEvent from './pages/CreateEvent';
 import EditEvent from './pages/EditEvent'; // <-- НОВИЙ ІМПОРТ
 import MyEvents from './pages/MyEvents';
 
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
