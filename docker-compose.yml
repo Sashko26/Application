@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # 1. База даних PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: event_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: event_management
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # 2. Наш NestJS Бекенд
+  backend:
+    build:
+      context: ./backend
+    container_name: event_backend
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_NAME=event_management
+      - JWT_SECRET=super-secret-key-123 # <-- Рятівний рядок для токенів
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  # 3. Наш React Фронтенд
+  frontend:
+    build:
+      context: ./frontend
+    container_name: event_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+# Зберігаємо дані бази навіть при перезапуску контейнерів
+volumes:
+  postgres_data:
